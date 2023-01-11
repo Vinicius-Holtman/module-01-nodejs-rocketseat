@@ -33,6 +33,6 @@ class InverseNumberStream extends Transform {
   }
 }
 
-new OneToHundredStream().pipe(
-  new MultiplyByTenStream()
-)
+new OneToHundredStream()
+.pipe(InverseNumberStream())
+.pipe(new MultiplyByTenStream())

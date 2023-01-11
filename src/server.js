@@ -1,6 +1,7 @@
 import http from "http"
 import { json } from "./middlewares/json.js";
 import { routes } from "./routes.js";
+import { extractQueryParams } from "./util/extract-query-params.js";
 
 
 const server = http.createServer(async (req, res) => {
@@ -16,6 +17,9 @@ const server = http.createServer(async (req, res) => {
     const routeParams = req.url.match(route.path)
 
     req.params = { ...routeParams.groups }
+
+    req.params = params
+    req.query = query ? extractQueryParams(query) : {}
 
     return route.handler(req, res)
   }
